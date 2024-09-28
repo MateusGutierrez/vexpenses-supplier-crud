@@ -1,7 +1,7 @@
 enum paths {
-    home = '/',
-    login = '/login',
-    register = '/register',
-    dashboard = '/dashboard'
+  home = '/',
+  login = '/login',
+  register = '/register',
+  dashboard = '/dashboard'
 }
-export default paths
+export default paths;

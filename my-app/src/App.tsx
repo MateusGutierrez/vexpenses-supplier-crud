@@ -1,15 +1,15 @@
-import { ToastContainer } from "react-toastify"
-import { GlobalStyle } from "./globalStyle"
-import MainRoute from "./routes"
+import { ToastContainer } from 'react-toastify';
+import { GlobalStyle } from './globalStyle';
+import MainRoute from './routes';
 
 function App() {
   return (
     <>
-      <GlobalStyle/>
-      <MainRoute/>
-      <ToastContainer/>
+      <GlobalStyle />
+      <MainRoute />
+      <ToastContainer />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

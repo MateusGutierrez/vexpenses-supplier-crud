@@ -1,5 +1,5 @@
-import { create } from "zustand";
-import { createJSONStorage, persist } from "zustand/middleware";
+import { create } from 'zustand';
+import { createJSONStorage, persist } from 'zustand/middleware';
 
 interface ThemeStore {
   isDark: boolean;
@@ -8,16 +8,16 @@ interface ThemeStore {
 
 export const useThemeStore = create<ThemeStore>()(
   persist(
-    (set) => ({
+    set => ({
       isDark: true,
       toggleTheme: () =>
-        set((state) => ({
-          isDark: !state.isDark,
-        })),
+        set(state => ({
+          isDark: !state.isDark
+        }))
     }),
     {
-      name: "theme-storage",
-      storage: createJSONStorage(() => sessionStorage),
+      name: 'theme-storage',
+      storage: createJSONStorage(() => sessionStorage)
     }
   )
 );

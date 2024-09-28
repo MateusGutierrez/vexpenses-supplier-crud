@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const ButtonUI = styled.button`
   display: inline-flex;
@@ -6,7 +6,7 @@ export const ButtonUI = styled.button`
   justify-content: center;
   background-color: hsl(var(--primary));
   color: hsl(var(--primary-foreground));
-  padding: 0.25rem .5rem;
+  padding: 0.25rem 0.5rem;
   font-size: 1rem;
   border-radius: 0.5rem;
   border: none;
