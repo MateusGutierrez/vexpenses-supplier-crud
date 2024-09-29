@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const BodyUI = styled.body`
+export const BodyUI = styled.div`
   div.content {
     width: 80%;
     margin: 0 auto;

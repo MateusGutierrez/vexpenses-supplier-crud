@@ -1,5 +1,6 @@
 const suppliersDummy = [
   {
+    id: 1,
     name: 'Fornecedor A',
     description: 'Fornecimento de materiais de construção',
     contacts: [
@@ -22,6 +23,7 @@ const suppliersDummy = [
     }
   },
   {
+    id: 2,
     name: 'Fornecedor B',
     description: 'Distribuição de alimentos',
     contacts: [
@@ -40,6 +42,7 @@ const suppliersDummy = [
     }
   },
   {
+    id: 3,
     name: 'Fornecedor C',
     description: 'Fornecimento de produtos eletrônicos',
     contacts: [

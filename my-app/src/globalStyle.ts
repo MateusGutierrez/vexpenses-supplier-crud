@@ -18,10 +18,10 @@ export const GlobalStyle = createGlobalStyle`
     --muted-foreground: 220 8.9% 46.1%;
     --accent: 220 14.3% 95.9%;
     --accent-foreground: 220.9 39.3% 11%;
-    /* --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 20% 98%; */
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 20% 98%;
     --border: 220 13% 91%;
-    /* --input: 220 13% 91%; */
+    --input: 220 13% 91%;
     --ring: 262.1 83.3% 57.8%;
     --radius: 0.5rem;
   }

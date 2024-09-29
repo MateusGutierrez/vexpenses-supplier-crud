@@ -7,3 +7,4 @@ export const loginSchema = yup.object({
     .min(6, 'Password must be at least 6 characters long')
     .required('Password is required')
 });
+export type loginFormValues = yup.InferType<typeof loginSchema>;

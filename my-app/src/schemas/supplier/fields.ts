@@ -1,4 +1,4 @@
-const supplierFields = [
+export const supplierPrimaryFields = [
   {
     name: 'name',
     label: 'Name',
@@ -10,26 +10,6 @@ const supplierFields = [
     label: 'Description',
     type: 'text',
     required: false
-  },
-  {
-    name: 'contacts',
-    label: 'Contacts',
-    type: 'array',
-    required: true,
-    fields: [
-      {
-        name: 'contactName',
-        label: 'Contact Name',
-        type: 'text',
-        required: true
-      },
-      {
-        name: 'contactPhone',
-        label: 'Contact Phone',
-        type: 'text',
-        required: true
-      }
-    ]
   },
   {
     name: 'address.cep',
@@ -69,4 +49,17 @@ const supplierFields = [
   }
 ];
 
-export default supplierFields;
+export const supplierContactFields = [
+  {
+    name: 'contact.name',
+    label: 'Contact Name',
+    type: 'text',
+    required: true
+  },
+  {
+    name: 'contact.phone',
+    label: 'Contact Phone',
+    type: 'text',
+    required: true
+  }
+];

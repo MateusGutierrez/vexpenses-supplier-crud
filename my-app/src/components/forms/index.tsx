@@ -5,6 +5,7 @@ import * as yup from 'yup';
 import Input from '../input';
 import { ButtonUI } from '../buttons/style';
 import { FormUI } from './style';
+import { useCallback } from 'react';
 
 interface FormField {
   name: string;
@@ -17,9 +18,10 @@ interface Props {
   schema: ObjectSchema<AnyObject>;
   fields: FormField[];
   buttonLabel: string;
+  submit: (data?: any) => void;
 }
 
-const Form = ({ schema, fields, buttonLabel }: Props) => {
+const Form = ({ schema, fields, buttonLabel, submit }: Props) => {
   const {
     register,
     handleSubmit,
@@ -27,10 +29,10 @@ const Form = ({ schema, fields, buttonLabel }: Props) => {
   } = useForm<yup.InferType<typeof schema>>({
     resolver: yupResolver(schema)
   });
-
-  const onSubmit = (data: yup.InferType<typeof schema>) => {
+  const onSubmit = useCallback((data: yup.InferType<typeof schema>) => {
     console.log(data);
-  };
+    submit(data);
+  }, []);
 
   return (
     <FormUI onSubmit={handleSubmit(onSubmit)}>

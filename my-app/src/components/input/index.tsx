@@ -21,6 +21,11 @@ const Input = forwardRef<HTMLInputElement, InputProps<any>>(
     { register, errors, name, label, type, required },
     ref: ForwardedRef<HTMLInputElement>
   ) => {
+    console.log(errors);
+    console.log(name);
+    console.log(label);
+    console.log(type);
+    console.log(required);
     return (
       <InputUI>
         <label>{label}</label>

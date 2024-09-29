@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import clsx from 'clsx';
 import { useThemeStore } from '../../../structure/theme/store/store';
 import { MdOutlineLightMode } from 'react-icons/md';
@@ -7,12 +7,14 @@ import { ButtonUI } from '../style';
 
 function ThemeToggleButton() {
   const { isDark, toggleTheme } = useThemeStore();
+  const onClick = useCallback(() => {
+    toggleTheme();
+  }, [toggleTheme]);
   useEffect(() => {
     document.body.className = clsx({ dark: isDark });
   }, [isDark]);
-
   return (
-    <ButtonUI onClick={toggleTheme}>
+    <ButtonUI onClick={onClick}>
       {isDark ? <MdOutlineLightMode /> : <FaRegMoon />}
     </ButtonUI>
   );

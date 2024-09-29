@@ -14,3 +14,4 @@ export const registerSchema = yup.object({
     .max(15, 'Large number')
     .required('Phone number is required')
 });
+export type registerFormValues = yup.InferType<typeof registerSchema>;
