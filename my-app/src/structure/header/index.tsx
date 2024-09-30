@@ -12,7 +12,7 @@ const Header = () => {
   const logout = userStore(state => state.logout);
   const onClick = useCallback(() => {
     logout();
-    toast.success('Saiu', { autoClose: 2500 });
+    toast.success('Lgout', { autoClose: 2500 });
   }, [logout]);
   return (
     <HeaderUI>

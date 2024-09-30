@@ -30,7 +30,7 @@ const SupplierCard = ({ supplier }: Props) => {
   const destroy = supplierStore(state => state.removeSupplier);
   const deleteSupplier = useCallback((id: string) => {
     destroy(id);
-    toast.success('Fornecedor excluído', { autoClose: 2500 });
+    toast.success('Supplier deleted', { autoClose: 2500 });
   }, []);
   return (
     <CardUI>

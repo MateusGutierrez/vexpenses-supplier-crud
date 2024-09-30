@@ -25,7 +25,6 @@ const RegisterForm = () => {
     },
     [signup]
   );
-  console.log(errors)
   return (
     <FormUI onSubmit={handleSubmit(onSubmit)}>
       <InputContainerUI>

@@ -1,6 +1,6 @@
 import { ReactNode, useCallback, useContext, useMemo } from 'react';
 import { createContext } from 'react';
-import { cep_api } from '../../apis/cep';
+import { cep_api } from '../../api/cep';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ViaCepResponse } from './interface';
@@ -19,7 +19,7 @@ export const CepProvider: React.FC<CepProviderProps> = ({ children }) => {
   const retrieveAddress = useCallback(async (cep: string) => {
     const cleanedCep = cep.replace(/\D/g, '');
     if (cleanedCep.length !== 8) {
-      toast.error('CEP inválido. Certifique-se de que ele tenha 8 dígitos.', {
+      toast.error('Invalid CEP. Make sure it is 8 digits long.', {
         autoClose: 2500
       });
       return null;
@@ -28,13 +28,13 @@ export const CepProvider: React.FC<CepProviderProps> = ({ children }) => {
     try {
       const response = await cep_api.get(`${cleanedCep}/json`);
       if (response.data.erro) {
-        toast.error('CEP não encontrado.', { autoClose: 2500 });
+        toast.error('CEP not found.', { autoClose: 2500 });
         return null;
       }
       return response.data;
     } catch (error) {
-      console.error('Erro ao buscar o endereço:', error);
-      toast.error('Erro ao buscar o endereço. Tente novamente mais tarde.', {
+      console.error('Error when searching for address:', error);
+      toast.error('Error searching for address. Please try again later.', {
         autoClose: 2500
       });
       return null;

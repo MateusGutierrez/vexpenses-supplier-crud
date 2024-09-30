@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { loginFormValues } from '../../schemas/login';
 import { registerFormValues } from '../../schemas/register';
-import { api } from '../../apis/users';
+import { api } from '../../api/users';
 import { userStore } from '../../store/userStore';
 import paths from '../../routes/paths';
 
@@ -34,17 +34,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     async (data: loginFormValues) => {
       try {
         const response = await api.post('auth/login', data);
-        console.log(response.data);
         if (response.data) {
           save(response.data);
-          toast.success('Login realizado com sucesso!', { autoClose: 2500 });
+          toast.success('Login success!', { autoClose: 2500 });
           setTimeout(() => {
             navigate(paths.dashboard);
           }, 2500);
         }
       } catch (error) {
-        console.log(error);
-        toast.error('E-mail ou senha incorretos', { autoClose: 2500 });
+        toast.error('E-mail/password incorrect', { autoClose: 2500 });
       }
     },
     [navigate]
@@ -54,17 +52,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     async (data: registerFormValues) => {
       try {
         const response = await api.post('auth/signup', data);
-        console.log(response.data);
         if (response.data) {
           setToken(response.data);
-          toast.success('Cadastro realizado com sucesso!', { autoClose: 2500 });
+          toast.success('Register success!', { autoClose: 2500 });
           setTimeout(() => {
             navigate(paths.login);
           }, 2500);
         }
       } catch (error) {
-        console.log(error);
-        toast.error('E-mail já em uso', { autoClose: 2500 });
+        toast.error('E-mail already registered', { autoClose: 2500 });
       }
     },
     [navigate]

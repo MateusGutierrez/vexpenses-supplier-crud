@@ -2,7 +2,6 @@ import * as yup from 'yup';
 
 const phoneRegExp = /^\(\d{2}\) \d{5}-\d{4}$/;
 const cepRegExp = /^\d{5}-\d{3}$/;
-const stateRegExp = /^[A-Z]{2}$/;
 
 export const supplierSchema = yup.object({
   name: yup

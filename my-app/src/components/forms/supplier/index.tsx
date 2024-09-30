@@ -58,7 +58,6 @@ export const SupplierForm: React.FC<Props> = ({
     const formatedCep = formatCep(cep);
     setValue('address.cep', formatedCep);
     const addressData = await retrieveAddress(formatedCep);
-    console.log(addressData);
     if (addressData) {
       setValue('address.state', addressData.uf);
       setValue('address.city', addressData.localidade);
@@ -79,13 +78,13 @@ export const SupplierForm: React.FC<Props> = ({
     if (add) {
       const newSupplier: Supplier = { ...data, id: uuid4() };
       add(newSupplier);
-      toast.success('Fornecedor adicionado com sucesso!', { autoClose: 2500 });
+      toast.success('Supplier added!', { autoClose: 2500 });
       return hide();
     }
     if (edit && supplier) {
       const supplierWithId: Supplier = { ...data, id: supplier.id as string };
       edit(supplierWithId, supplier.id as string);
-      toast.success('Fornecedor editado com sucesso!', { autoClose: 2500 });
+      toast.success('Supplier edited!', { autoClose: 2500 });
       return hide();
     }
   };
