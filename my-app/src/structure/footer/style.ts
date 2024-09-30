@@ -12,4 +12,11 @@ export const FooterUI = styled.footer`
     justify-content: space-between;
     align-items: center;
   }
+  @media (max-width: 450px) {
+    height: fit-content;
+    padding: 1rem;
+    .footer-container {
+      flex-direction: column;
+    }
+  }
 `;

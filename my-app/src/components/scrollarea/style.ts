@@ -8,6 +8,7 @@ export const ScrollAreaContainer = styled.div`
 export const ScrollViewport = styled.div`
   height: 100%;
   overflow-y: auto;
+  overflow-x: auto;
   padding-right: 16px;
   &::-webkit-scrollbar {
     width: 8px;

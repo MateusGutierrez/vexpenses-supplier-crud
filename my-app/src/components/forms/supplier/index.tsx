@@ -7,6 +7,11 @@ import { Supplier } from '../../../store/supplierStore/interface';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useCep } from '../../../services/cep';
+import { formatCep, formatPhone, formatState } from './utils';
+import { FormContainerUI } from './style';
+import { ButtonUI } from '../../buttons/style';
+import { IoTrash } from 'react-icons/io5';
+import ScrollArea from '../../scrollarea';
 
 interface Props {
   supplier?: Supplier;
@@ -50,7 +55,9 @@ export const SupplierForm: React.FC<Props> = ({
   const { retrieveAddress } = useCep();
   const handleCepOnChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const cep = e.target.value;
-    const addressData = await retrieveAddress(cep);
+    const formatedCep = formatCep(cep);
+    setValue('address.cep', formatedCep);
+    const addressData = await retrieveAddress(formatedCep);
     console.log(addressData);
     if (addressData) {
       setValue('address.state', addressData.uf);
@@ -58,6 +65,15 @@ export const SupplierForm: React.FC<Props> = ({
       setValue('address.reference', addressData.complemento);
       setValue('address.street', addressData.logradouro);
     }
+  };
+  const handlePhoneChange = (index: number, value: string) => {
+    const formattedPhone = formatPhone(value);
+    setValue(`contacts.${index}.phone`, formattedPhone);
+  };
+
+  const handleStateChange = (value: string) => {
+    const formattedState = formatState(value);
+    setValue('address.state', formattedState);
   };
   const onSubmit = (data: SupplierFieldValues) => {
     if (add) {
@@ -79,80 +95,110 @@ export const SupplierForm: React.FC<Props> = ({
     }
   }, [supplier, reset]);
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div>
-        <label>Nome*</label>
-        <input {...register('name')} />
-        {errors.name && toast.error(errors.name.message, { autoClose: 2500 })}
+    <FormContainerUI onSubmit={handleSubmit(onSubmit)}>
+      <div className="name-descr-container">
+        <div className="field">
+          <label>Nome*</label>
+          <input {...register('name')} />
+          {errors.name && toast.error(errors.name.message, { autoClose: 2500 })}
+        </div>
+        <div className="field descript">
+          <label>Descrição</label>
+          <input {...register('description')} />
+          {errors.description &&
+            toast.error(errors.description.message, { autoClose: 2500 })}
+        </div>
       </div>
-      <div>
-        <label>Descrição</label>
-        <input {...register('description')} />
-        {errors.description &&
-          toast.error(errors.description.message, { autoClose: 2500 })}
-      </div>
-      <div>
-        <label>Contatos*</label>
-        {fields.map((field, index) => (
-          <div key={field.id}>
-            <label>Nome do Contato*</label>
-            <input {...register(`contacts.${index}.name`)} />
-            {errors.contacts?.[index]?.name &&
-              toast.error(errors.contacts[index].name?.message, {
-                autoClose: 2500
-              })}
-            <label>Telefone*</label>
-            <input {...register(`contacts.${index}.phone`)} />
-            {errors.contacts?.[index]?.phone &&
-              toast.error(errors.contacts[index].phone?.message, {
-                autoClose: 2500
-              })}
-            <button type="button" onClick={() => remove(index)}>
-              Remover Contato
-            </button>
+      <div className="contact-div">
+        <label className="contact-title">Contatos*</label>
+        <ScrollArea>
+          <div className="scroll-container">
+            {fields.map((field, index) => (
+              <div key={field.id} className="contact-container">
+                <div className="field">
+                  <label>Nome do Contato*</label>
+                  <input {...register(`contacts.${index}.name`)} />
+                  {errors.contacts?.[index]?.name &&
+                    toast.error(errors.contacts[index].name?.message, {
+                      autoClose: 2500
+                    })}
+                </div>
+                <div className="field">
+                  <label>Telefone*</label>
+                  <div className="remove-contact">
+                    <input
+                      {...register(`contacts.${index}.phone`)}
+                      onChange={e => handlePhoneChange(index, e.target.value)}
+                    />
+                    {errors.contacts?.[index]?.phone &&
+                      toast.error(errors.contacts[index].phone?.message, {
+                        autoClose: 2500
+                      })}
+                    <ButtonUI type="button" onClick={() => remove(index)}>
+                      <IoTrash />
+                    </ButtonUI>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
-        <button type="button" onClick={() => append({ name: '', phone: '' })}>
-          Adicionar Contato
-        </button>
+        </ScrollArea>
+        <ButtonUI
+          type="button"
+          onClick={() => append({ name: '', phone: '' })}
+          className="add-contact"
+        >
+          Add Contact
+        </ButtonUI>
       </div>
       <div>
-        <label>CEP*</label>
-        <input {...register('address.cep')} onBlur={handleCepOnChange} />
-        {errors.address?.cep &&
-          toast.error(errors.address?.cep.message, { autoClose: 2500 })}
+        <div className="cep-city-state">
+          <div className="field-cep">
+            <label>CEP*</label>
+            <input {...register('address.cep')} onBlur={handleCepOnChange} />
+            {errors.address?.cep &&
+              toast.error(errors.address?.cep.message, { autoClose: 2500 })}
+          </div>
+          <div className="field-state">
+            <label>Estado*</label>
+            <input
+              {...register('address.state')}
+              onChange={e => handleStateChange(e.target.value)}
+            />
+            {errors.address?.state &&
+              toast.error(errors.address?.state.message, { autoClose: 2500 })}
+          </div>
+          <div className="field-city">
+            <label>Cidade*</label>
+            <input {...register('address.city')} />
+            {errors.address?.city &&
+              toast.error(errors.address?.city.message, { autoClose: 2500 })}
+          </div>
+          <div className="field-state">
+            <label>Número*</label>
+            <input type="number" {...register('address.number')} />
+            {errors.address?.number &&
+              toast.error(errors.address?.number.message, { autoClose: 2500 })}
+          </div>
+        </div>
       </div>
-      <div>
-        <label>Estado*</label>
-        <input {...register('address.state')} />
-        {errors.address?.state &&
-          toast.error(errors.address?.state.message, { autoClose: 2500 })}
+      <div className="street-complement">
+        <div className="field">
+          <label>Logradouro*</label>
+          <input {...register('address.street')} />
+          {errors.address?.street &&
+            toast.error(errors.address?.street.message, { autoClose: 2500 })}
+        </div>
+        <div className="field">
+          <label>Referência</label>
+          <input {...register('address.reference')} />
+          {errors.address?.reference &&
+            toast.error(errors.address?.reference.message, { autoClose: 2500 })}
+        </div>
       </div>
-      <div>
-        <label>Cidade*</label>
-        <input {...register('address.city')} />
-        {errors.address?.city &&
-          toast.error(errors.address?.city.message, { autoClose: 2500 })}
-      </div>
-      <div>
-        <label>Logradouro*</label>
-        <input {...register('address.street')} />
-        {errors.address?.street &&
-          toast.error(errors.address?.street.message, { autoClose: 2500 })}
-      </div>
-      <div>
-        <label>Número*</label>
-        <input type="number" {...register('address.number')} />
-        {errors.address?.number &&
-          toast.error(errors.address?.number.message, { autoClose: 2500 })}
-      </div>
-      <div>
-        <label>Referência</label>
-        <input {...register('address.reference')} />
-        {errors.address?.reference &&
-          toast.error(errors.address?.reference.message, { autoClose: 2500 })}
-      </div>
-      <button type="submit">Finalizar</button>
-    </form>
+      <ButtonUI type="submit" className="finish">
+        Finish
+      </ButtonUI>
+    </FormContainerUI>
   );
 };

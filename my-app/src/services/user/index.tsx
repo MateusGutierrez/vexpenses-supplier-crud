@@ -2,13 +2,17 @@ import React, {
   createContext,
   useContext,
   useCallback,
-  ReactNode
+  ReactNode,
+  useEffect,
+  useMemo
 } from 'react';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { loginFormValues } from '../../schemas/login';
 import { registerFormValues } from '../../schemas/register';
 import { api } from '../../apis/users';
+import { userStore } from '../../store/userStore';
+import paths from '../../routes/paths';
 
 interface AuthContextType {
   login: (data: loginFormValues) => Promise<void>;
@@ -22,16 +26,20 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+  const save = userStore(state => state.saveUser);
+  const setToken = userStore(state => state.setAuthToken);
   const navigate = useNavigate();
+  const loggedUser = userStore(state => state.loggedUser);
   const login = useCallback(
     async (data: loginFormValues) => {
       try {
         const response = await api.post('auth/login', data);
         console.log(response.data);
         if (response.data) {
+          save(response.data);
           toast.success('Login realizado com sucesso!', { autoClose: 2500 });
           setTimeout(() => {
-            navigate('/dashboard');
+            navigate(paths.dashboard);
           }, 2500);
         }
       } catch (error) {
@@ -48,9 +56,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         const response = await api.post('auth/signup', data);
         console.log(response.data);
         if (response.data) {
+          setToken(response.data);
           toast.success('Cadastro realizado com sucesso!', { autoClose: 2500 });
           setTimeout(() => {
-            navigate('/login');
+            navigate(paths.login);
           }, 2500);
         }
       } catch (error) {
@@ -60,8 +69,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     },
     [navigate]
   );
+  useEffect(() => {
+    if (loggedUser) navigate(paths.dashboard);
+  }, [loggedUser, navigate]);
 
-  const value = React.useMemo(() => ({ login, signup }), [login, signup]);
+  const value = useMemo(() => ({ login, signup }), [login, signup]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

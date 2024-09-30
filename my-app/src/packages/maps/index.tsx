@@ -18,7 +18,7 @@ export const OpenMapButton: React.FC<Props> = ({ address }) => {
     const fullAddress = `${address.street}, ${address.number}, ${address.city}, ${address.state}`;
     const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(fullAddress)}`;
     window.open(mapUrl, '_blank');
-  },[address]);
+  }, [address]);
 
   return (
     <ButtonUI onClick={openMap}>

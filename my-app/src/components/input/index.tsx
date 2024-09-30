@@ -21,22 +21,17 @@ const Input = forwardRef<HTMLInputElement, InputProps<any>>(
     { register, errors, name, label, type, required },
     ref: ForwardedRef<HTMLInputElement>
   ) => {
-    console.log(errors);
-    console.log(name);
-    console.log(label);
-    console.log(type);
-    console.log(required);
     return (
       <InputUI>
         <label>{label}</label>
         <input
-          {...register(name as string, {
+          {...register(name, {
             required: required ? `${label} is required` : false
           })}
           type={type}
           ref={ref}
         />
-        {errors[name] && (
+        {errors && errors[name] && (
           <span>
             {(errors[name] as FieldError).message || 'Error occurred'}
           </span>

@@ -6,7 +6,7 @@ export const DashboardUI = styled.div`
   width: 100%;
   gap: 1rem;
   overflow: auto;
-  .left-container {
+  .container {
     width: 100%;
   }
 `;

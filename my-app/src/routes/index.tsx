@@ -11,6 +11,7 @@ const MainRoute = () => (
     <Route path={paths.login} element={<Page children={<Login />} />} />
     <Route path={paths.register} element={<Page children={<Register />} />} />
     <Route path={paths.dashboard} element={<Page children={<Dashboard />} />} />
+    <Route path="*" element={<h1>Hello world !</h1>} />
   </Routes>
 );
 

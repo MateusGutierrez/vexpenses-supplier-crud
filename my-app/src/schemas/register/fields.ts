@@ -16,12 +16,6 @@ const registerFields = [
     label: 'Password',
     type: 'password',
     required: true
-  },
-  {
-    name: 'phone',
-    label: 'Phone',
-    type: 'phone',
-    required: true
   }
 ];
 export default registerFields;

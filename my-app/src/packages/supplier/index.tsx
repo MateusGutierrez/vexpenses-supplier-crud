@@ -27,13 +27,15 @@ export const SupplierFeature = () => {
             suppliers={supplierList}
             setFilteredSuppliers={setFilteredSuppliers}
           />
-          <ButtonUI onClick={show}>addicionar</ButtonUI>
-          {filteredSuppliers && (
-            <DownloadCSVButton suppliers={filteredSuppliers} />
-          )}
-          <Modal isVisible={isVisible} closeModal={hide}>
-            <SupplierForm add={addSupplier} hide={hide} />
-          </Modal>
+          <div className="add-download">
+            <ButtonUI onClick={show}>Add Supplier</ButtonUI>
+            {filteredSuppliers && (
+              <DownloadCSVButton suppliers={filteredSuppliers} />
+            )}
+            <Modal isVisible={isVisible} closeModal={hide}>
+              <SupplierForm add={addSupplier} hide={hide} />
+            </Modal>
+          </div>
         </div>
       </HeaderSupplier>
       {isEmpty(filteredSuppliers) ? (
