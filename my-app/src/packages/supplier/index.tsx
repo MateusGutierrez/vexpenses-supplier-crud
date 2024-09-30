@@ -40,7 +40,7 @@ export const SupplierFeature = () => {
       </HeaderSupplier>
       {isEmpty(filteredSuppliers) ? (
         <div>
-          <p>Empty list</p>
+          <label>The suppliers list is currently empty. Please add new suppliers to proceed.</label>
         </div>
       ) : (
         <ListUI>

@@ -5,7 +5,9 @@ const Login = () => {
   return (
     <>
       <LoginUI>
-        <h1>Login</h1>
+        <div>
+          <h1>Login</h1>
+        </div>
         <LoginForm />
       </LoginUI>
     </>

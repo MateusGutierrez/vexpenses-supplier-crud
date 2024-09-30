@@ -7,6 +7,8 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAuth } from '../../../services/user';
 import { registerFormValues, registerSchema } from '../../../schemas/register';
+import { InputContainerUI, LinkUI } from '../login/style';
+import paths from '../../../routes/paths';
 
 const RegisterForm = () => {
   const {
@@ -23,28 +25,33 @@ const RegisterForm = () => {
     },
     [signup]
   );
-
+  console.log(errors)
   return (
     <FormUI onSubmit={handleSubmit(onSubmit)}>
-      <div>
+      <InputContainerUI>
         <label>Name</label>
         <input {...register('name')} type="text" />
-        {errors.name && toast.error(errors.name.message, { autoClose: 2500 })}
-      </div>
-      <div>
+        {errors.name && errors.name.message ? toast.error(errors.name.message, { autoClose: 2500 }) : null}
+      </InputContainerUI>
+      <InputContainerUI>
         <label>Email</label>
         <input {...register('email')} type="email" />
-        {errors.email && toast.error(errors.email.message, { autoClose: 2500 })}
-      </div>
-      <div>
+        {errors.email && errors.email.message ? toast.error(errors.email.message, { autoClose: 2500 }) : null}
+      </InputContainerUI>
+      <InputContainerUI>
         <label>Password</label>
         <input {...register('password')} type="password" />
-        {errors.password &&
-          toast.error(errors.password.message, { autoClose: 2500 })}
-      </div>
+        {errors.password && errors.password.message ?
+          toast.error(errors.password.message, { autoClose: 2500 }) : null}
+      </InputContainerUI>
       <ButtonUI className="submit" type="submit">
         Register
       </ButtonUI>
+      <LinkUI>
+        <a href={paths.login}>
+          <label>Login</label>
+        </a>
+      </LinkUI>
     </FormUI>
   );
 };

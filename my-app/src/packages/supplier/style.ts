@@ -10,7 +10,7 @@ export const HeaderSupplier = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: fit-content;
+    width: fit-content !important;
     gap: 1rem;
     .add-download {
       display: flex;

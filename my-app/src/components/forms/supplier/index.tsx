@@ -98,25 +98,25 @@ export const SupplierForm: React.FC<Props> = ({
     <FormContainerUI onSubmit={handleSubmit(onSubmit)}>
       <div className="name-descr-container">
         <div className="field">
-          <label>Nome*</label>
+          <label>Name<strong className='required'>*</strong></label>
           <input {...register('name')} />
           {errors.name && toast.error(errors.name.message, { autoClose: 2500 })}
         </div>
         <div className="field descript">
-          <label>Descrição</label>
+          <label>Description</label>
           <input {...register('description')} />
           {errors.description &&
             toast.error(errors.description.message, { autoClose: 2500 })}
         </div>
       </div>
       <div className="contact-div">
-        <label className="contact-title">Contatos*</label>
+        <label className="contact-title">Contacts<strong className='required'>*</strong></label>
         <ScrollArea>
           <div className="scroll-container">
             {fields.map((field, index) => (
               <div key={field.id} className="contact-container">
                 <div className="field">
-                  <label>Nome do Contato*</label>
+                  <label>Name<strong className='required'>*</strong></label>
                   <input {...register(`contacts.${index}.name`)} />
                   {errors.contacts?.[index]?.name &&
                     toast.error(errors.contacts[index].name?.message, {
@@ -124,7 +124,7 @@ export const SupplierForm: React.FC<Props> = ({
                     })}
                 </div>
                 <div className="field">
-                  <label>Telefone*</label>
+                  <label>Phone<strong className='required'>*</strong></label>
                   <div className="remove-contact">
                     <input
                       {...register(`contacts.${index}.phone`)}
@@ -154,13 +154,13 @@ export const SupplierForm: React.FC<Props> = ({
       <div>
         <div className="cep-city-state">
           <div className="field-cep">
-            <label>CEP*</label>
+            <label>CEP<strong className='required'>*</strong></label>
             <input {...register('address.cep')} onBlur={handleCepOnChange} />
             {errors.address?.cep &&
               toast.error(errors.address?.cep.message, { autoClose: 2500 })}
           </div>
           <div className="field-state">
-            <label>Estado*</label>
+            <label>State<strong className='required'>*</strong></label>
             <input
               {...register('address.state')}
               onChange={e => handleStateChange(e.target.value)}
@@ -169,13 +169,13 @@ export const SupplierForm: React.FC<Props> = ({
               toast.error(errors.address?.state.message, { autoClose: 2500 })}
           </div>
           <div className="field-city">
-            <label>Cidade*</label>
+            <label>City<strong className='required'>*</strong></label>
             <input {...register('address.city')} />
             {errors.address?.city &&
               toast.error(errors.address?.city.message, { autoClose: 2500 })}
           </div>
           <div className="field-state">
-            <label>Número*</label>
+            <label>Number<strong className='required'>*</strong></label>
             <input type="number" {...register('address.number')} />
             {errors.address?.number &&
               toast.error(errors.address?.number.message, { autoClose: 2500 })}
@@ -184,13 +184,13 @@ export const SupplierForm: React.FC<Props> = ({
       </div>
       <div className="street-complement">
         <div className="field">
-          <label>Logradouro*</label>
+          <label>Street<strong className='required'>*</strong></label>
           <input {...register('address.street')} />
           {errors.address?.street &&
             toast.error(errors.address?.street.message, { autoClose: 2500 })}
         </div>
         <div className="field">
-          <label>Referência</label>
+          <label>Reference</label>
           <input {...register('address.reference')} />
           {errors.address?.reference &&
             toast.error(errors.address?.reference.message, { autoClose: 2500 })}

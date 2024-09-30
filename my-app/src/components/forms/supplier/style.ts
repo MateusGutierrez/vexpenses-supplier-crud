@@ -1,6 +1,13 @@
 import styled from 'styled-components';
 
 export const FormContainerUI = styled.form`
+  .required{
+    color: hsl(var(--destructive))
+  }
+  color: transparent !important;
+    label, input{
+        color: hsl(var(--foreground));
+    }
   display: flex;
   flex-direction: column;
   max-width: 500px;
@@ -19,7 +26,6 @@ export const FormContainerUI = styled.form`
     }
   }
   .contact-div {
-    /* width: fit-content; */
     .contact-title {
       margin-bottom: 1rem;
     }

@@ -7,6 +7,8 @@ import { loginFormValues, loginSchema } from '../../../schemas/login';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAuth } from '../../../services/user';
+import paths from '../../../routes/paths';
+import { InputContainerUI, LinkUI } from './style';
 
 const LoginForm = () => {
   const {
@@ -19,28 +21,31 @@ const LoginForm = () => {
   const { login } = useAuth();
   const onSubmit = useCallback(
     (data: loginFormValues) => {
-      console.log(data, 'submit');
       login(data);
     },
     [login]
   );
-
   return (
     <FormUI onSubmit={handleSubmit(onSubmit)}>
-      <div>
+      <InputContainerUI>
         <label>Email</label>
-        <input {...register('email')} type="email" />
-        {errors.email && toast.error(errors.email.message, { autoClose: 2500 })}
-      </div>
-      <div>
+        <input {...register('email')} type="email" name='email'/>
+        {errors.email && errors.email.message ? toast.error(errors.email.message, { autoClose: 2500 }) : null}
+      </InputContainerUI>
+      <InputContainerUI>
         <label>Password</label>
-        <input {...register('password')} type="password" />
-        {errors.password &&
-          toast.error(errors.password.message, { autoClose: 2500 })}
-      </div>
+        <input {...register('password')} type="password" name='password'/>
+        {errors.password && errors.password.message ? 
+          toast.error(errors.password.message, { autoClose: 2500 }) : null}
+      </InputContainerUI>
       <ButtonUI className="submit" type="submit">
         Login
       </ButtonUI>
+      <LinkUI>
+        <a href={paths.register}>
+          <label>Register</label>
+        </a>
+      </LinkUI>
     </FormUI>
   );
 };

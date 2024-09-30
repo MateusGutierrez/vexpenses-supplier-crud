@@ -54,7 +54,6 @@ export const CardContainerContentUI = styled.div`
   .contacts {
     .contacts-container {
       display: flex;
-      justify-content: space-between;
       gap: 1rem;
       padding-left: 1rem;
       .contact {
