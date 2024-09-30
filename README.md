@@ -67,7 +67,7 @@ Este projeto é um CRUD (Create, Read, Update, Delete) de fornecedores, implemen
 1. Clone o repositório:
    ```bash
    git clone https://github.com/MateusGutierrez/vexpenses-supplier-crud.git
-   cd vexpenses-supplier-crud
+   cd vexpenses-supplier-crud/my-app
    ```
 
 2. Instale as dependências:
