@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 
 export const FormContainerUI = styled.form`
-  .required{
-    color: hsl(var(--destructive))
+  .required {
+    color: hsl(var(--destructive));
   }
   color: transparent !important;
-    label, input{
-        color: hsl(var(--foreground));
-    }
+  label,
+  input {
+    color: hsl(var(--foreground));
+  }
   display: flex;
   flex-direction: column;
   max-width: 500px;

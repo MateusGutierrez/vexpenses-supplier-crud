@@ -30,18 +30,23 @@ const RegisterForm = () => {
       <InputContainerUI>
         <label>Name</label>
         <input {...register('name')} type="text" />
-        {errors.name && errors.name.message ? toast.error(errors.name.message, { autoClose: 2500 }) : null}
+        {errors.name && errors.name.message
+          ? toast.error(errors.name.message, { autoClose: 2500 })
+          : null}
       </InputContainerUI>
       <InputContainerUI>
         <label>Email</label>
         <input {...register('email')} type="email" />
-        {errors.email && errors.email.message ? toast.error(errors.email.message, { autoClose: 2500 }) : null}
+        {errors.email && errors.email.message
+          ? toast.error(errors.email.message, { autoClose: 2500 })
+          : null}
       </InputContainerUI>
       <InputContainerUI>
         <label>Password</label>
         <input {...register('password')} type="password" />
-        {errors.password && errors.password.message ?
-          toast.error(errors.password.message, { autoClose: 2500 }) : null}
+        {errors.password && errors.password.message
+          ? toast.error(errors.password.message, { autoClose: 2500 })
+          : null}
       </InputContainerUI>
       <ButtonUI className="submit" type="submit">
         Register

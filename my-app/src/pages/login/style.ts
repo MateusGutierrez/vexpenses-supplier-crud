@@ -7,7 +7,7 @@ export const LoginUI = styled.div`
   justify-content: center;
   width: 100%;
   gap: 1rem;
-  .nav-container{
+  .nav-container {
     display: flex;
     justify-content: space-between;
     align-items: center;

@@ -29,14 +29,17 @@ const LoginForm = () => {
     <FormUI onSubmit={handleSubmit(onSubmit)}>
       <InputContainerUI>
         <label>Email</label>
-        <input {...register('email')} type="email" name='email'/>
-        {errors.email && errors.email.message ? toast.error(errors.email.message, { autoClose: 2500 }) : null}
+        <input {...register('email')} type="email" name="email" />
+        {errors.email && errors.email.message
+          ? toast.error(errors.email.message, { autoClose: 2500 })
+          : null}
       </InputContainerUI>
       <InputContainerUI>
         <label>Password</label>
-        <input {...register('password')} type="password" name='password'/>
-        {errors.password && errors.password.message ? 
-          toast.error(errors.password.message, { autoClose: 2500 }) : null}
+        <input {...register('password')} type="password" name="password" />
+        {errors.password && errors.password.message
+          ? toast.error(errors.password.message, { autoClose: 2500 })
+          : null}
       </InputContainerUI>
       <ButtonUI className="submit" type="submit">
         Login
